@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=ru.trushkin.spring.raven.RavenConfiguration
+
+org.springframework.context.ApplicationContextInitializer=ru.trushkin.spring.raven.RejectProfilesApplicationInitializer
+
+org.springframework.boot.env.EnvironmentPostProcessor=ru.trushkin.spring.raven.ProfileEnvironmentPostProcessor
