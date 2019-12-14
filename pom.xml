@@ -20,5 +20,6 @@
         <module>example</module>
         <module>example2</module>
         <module>bootExamples</module>
+        <module>security-example</module>
     </modules>
 </project>
