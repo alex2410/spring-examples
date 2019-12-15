@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.trushkin.spring.bank.dao.MoneyDao;
+import ru.trushkin.spring.bank.dao.TestDao;
 import ru.trushkin.spring.bank.models.Bank;
+import ru.trushkin.spring.bank.models.TestEntity;
 import ru.trushkin.spring.bank.service.TransferMoneyService;
 
 import java.math.BigDecimal;
@@ -15,10 +17,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class IronBankController {
 
     private MoneyDao moneyDao;
+    private TestDao testDao;
     private TransferMoneyService transferMoneyService;
 
     @Autowired
-    public IronBankController(MoneyDao moneyDao, TransferMoneyService transferMoneyService) {
+    public IronBankController(MoneyDao moneyDao, TransferMoneyService transferMoneyService, TestDao testDao) {
+        this.testDao = testDao;
         this.moneyDao = moneyDao;
         this.transferMoneyService = transferMoneyService;
     }
@@ -48,5 +52,20 @@ public class IronBankController {
         b.setAmount(bigDecimal);
         moneyDao.save(b);
         return bigDecimal;
+    }
+
+    @GetMapping("/test")
+    public TestEntity createTest() {
+        TestEntity testEntity = testDao.getEntity();
+        if (testEntity != null) {
+            testEntity.setAmount(testEntity.getAmount().multiply(BigDecimal.TEN));
+            testDao.save(testEntity);
+            return testEntity;
+        }
+        BigDecimal bigDecimal = new BigDecimal(ThreadLocalRandom.current().nextInt(1, 100));
+        TestEntity b = new TestEntity();
+        b.setAmount(bigDecimal);
+        testDao.save(b);
+        return b;
     }
 }

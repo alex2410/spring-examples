@@ -9,6 +9,6 @@ import javax.swing.*;
 public class OnProductionConditional implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        return JOptionPane.showConfirmDialog(null, "Is production?") == JOptionPane.YES_OPTION;
+        return true;//JOptionPane.showConfirmDialog(null, "Is production?") == JOptionPane.YES_OPTION;
     }
 }

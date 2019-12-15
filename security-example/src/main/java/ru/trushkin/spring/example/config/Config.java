@@ -56,7 +56,8 @@ public class Config extends WebSecurityConfigurerAdapter implements WebMvcConfig
                 .antMatchers("/everyone").permitAll()
                 .antMatchers("/hello").hasRole("USER")
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and().anonymous().disable();
     }
 
     @Bean
